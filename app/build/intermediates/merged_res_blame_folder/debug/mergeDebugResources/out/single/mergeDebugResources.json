@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.ark.jiagu.app-debug-31:/layout_activity_main.xml.flat",
+        "source": "com.ark.jiagu.app-main-33:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/9.4.1/com.ark.jiagu.app-debug-31:/xml_file_paths.xml.flat",
+        "source": "/root/.gradle/daemon/9.4.1/com.ark.jiagu.app-main-33:/xml/file_paths.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/9.4.1/com.ark.jiagu.app-debug-31:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/root/.gradle/daemon/9.4.1/com.ark.jiagu.app-main-33:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ark.jiagu.app-debug-31:/layout_dialog_so_name_preset.xml.flat",
+        "source": "com.ark.jiagu.app-main-33:/layout/dialog_so_name_preset.xml"
+    },
+    {
+        "merged": "com.ark.jiagu.app-debug-31:/layout_dialog_settings.xml.flat",
+        "source": "com.ark.jiagu.app-main-33:/layout/dialog_settings.xml"
+    },
+    {
+        "merged": "com.ark.jiagu.app-debug-31:/layout_dialog_about.xml.flat",
+        "source": "com.ark.jiagu.app-main-33:/layout/dialog_about.xml"
+    }
+]

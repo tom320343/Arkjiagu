@@ -1,0 +1,86 @@
+plugins {
+    id("com.android.application")
+}
+
+android {
+    namespace 'com.ark.jiagu'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.ark.jiagu"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "2.4(improved)"
+
+        ndkVersion "21.4.7075529"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+    defaultConfig {
+        ndk {
+            abiFilters "arm64-v8a"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file("release.keystore")
+            storePassword "arkjiagu"
+            keyAlias "arkjiagu"
+            keyPassword "arkjiagu"
+            enableV1Signing true
+            enableV2Signing true
+            enableV3Signing true
+            enableV4Signing false
+        }
+        release {
+            storeFile file("release.keystore")
+            storePassword "arkjiagu"
+            keyAlias "arkjiagu"
+            keyPassword "arkjiagu"
+            enableV1Signing true
+            enableV2Signing true
+            enableV3Signing true
+            enableV4Signing false
+        }
+    }
+}
+
+configurations.configureEach {
+    exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk7"
+    exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk8"
+}
+
+dependencies {
+    implementation fileTree(dir:'libs',include:['*.jar'])
+    implementation "androidx.activity:activity:1.9.0"
+    implementation "androidx.appcompat:appcompat:1.7.1"
+    implementation "com.google.android.material:material:1.10.0"
+    implementation 'com.android.tools.smali:smali-dexlib2:3.0.9'
+    implementation 'com.github.TimScriptov:apksigner:1.2.0'
+    implementation 'org.bouncycastle:bcprov-jdk15to18:1.78.1'
+}
