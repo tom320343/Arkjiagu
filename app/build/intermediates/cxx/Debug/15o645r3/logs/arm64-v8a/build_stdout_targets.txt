@@ -15,8 +15,8 @@ const char g_ark_vmp_section[] = "";
 extern const char g_ark_vmp_section[];
                   ^
 1 warning generated.
-[6/15] Building CXX object CMakeFiles/ArkStub.dir/VmpRuntime.cpp.o
-[7/15] Building CXX object CMakeFiles/ArkStub.dir/ArkDexLoader.cpp.o
+[6/15] Building CXX object CMakeFiles/ArkStub.dir/ArkDexLoader.cpp.o
+[7/15] Building CXX object CMakeFiles/ArkStub.dir/VmpRuntime.cpp.o
 [8/15] Building CXX object CMakeFiles/ArkStub.dir/VmpInterpreter.cpp.o
 [9/15] Building CXX object CMakeFiles/ArkStub.dir/VmContext.cpp.o
 [10/15] Building CXX object CMakeFiles/ArkStub.dir/VmOpcodeHandler.cpp.o
