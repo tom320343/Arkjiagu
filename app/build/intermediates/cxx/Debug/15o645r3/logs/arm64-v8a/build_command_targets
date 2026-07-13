@@ -1,0 +1,5 @@
+/opt/android-sdk/cmake/3.22.1/bin/ninja \
+  -C \
+  /workspace/Arkjiagu/app/.cxx/Debug/15o645r3/arm64-v8a \
+  ArkStub \
+  ArkTool

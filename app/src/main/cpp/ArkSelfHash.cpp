@@ -95,7 +95,7 @@ static int64_t ark_sys_read(int fd, void *buf, size_t count) {
 
 static int64_t ark_sys_open(const char *path, int flags, mode_t mode) {
 #ifdef __aarch64__
-    register const char *x0 __asm__("x0") = path;
+    register int64_t x0 __asm__("x0") = (int64_t)(intptr_t)path;
     register int x1 __asm__("x1") = flags;
     register mode_t x2 __asm__("x2") = mode;
     register int64_t x8 __asm__("x8") = __NR_openat;
@@ -654,7 +654,7 @@ jboolean ark_get_self_cert_sha256(JNIEnv *env, jbyteArray outSha256) {
         expected_len = sizeof(expected_hex) - 1;
     }
 
-    xor_deobfuscate(expected_hex, g_expected_sha256_hex, expected_len, g_key_xor_5a);
+    xor_deobfuscate(expected_hex, (const unsigned char *)g_expected_sha256_hex, expected_len, g_key_xor_5a);
 
     ARK_LOGI("[ArkSelfHash] 计算证书 SHA256: %s", computed_hex);
     ARK_LOGI("[ArkSelfHash] 预期证书 SHA256: %s", expected_hex);

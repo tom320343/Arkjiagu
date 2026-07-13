@@ -13,6 +13,9 @@
 #if __has_include(<sys/random.h>)
 #include <sys/random.h>
 #endif
+
+static bool fillRandomBytes(unsigned char *buffer, int len);
+
 static const int ARK_BLOCK_TYPE_DEX = 1;
 static const int ARK_BLOCK_TYPE_APP = 2;
 static const int ARK_BLOCK_TYPE_INDEX = 3;
@@ -159,7 +162,7 @@ static void deriveSecondLayerKey(
             return (x & y) | ((~x) & z);
         };
 
-        auto FF = [](unsigned int &a, unsigned int b, unsigned int c, unsigned int d,
+        auto FF = [&](unsigned int &a, unsigned int b, unsigned int c, unsigned int d,
                      unsigned int x, unsigned int s, unsigned int ac) {
             a += F(b, c, d) + x + ac;
             a = (a << s) | (a >> (32 - s));
