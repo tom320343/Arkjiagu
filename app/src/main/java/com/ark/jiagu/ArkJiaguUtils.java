@@ -1012,6 +1012,9 @@ public class ArkJiaguUtils {
         String jksAlias;
         String jksKeyPass;
 
+        String disguiseName;
+        boolean hideArkFeatures;
+
         ArkSettings(
                 String soName,
                 String stubClassName,
@@ -1023,7 +1026,9 @@ public class ArkJiaguUtils {
                 String jksPath,
                 String jksStorePass,
                 String jksAlias,
-                String jksKeyPass
+                String jksKeyPass,
+                String disguiseName,
+                boolean hideArkFeatures
         ) {
             this.soName = soName;
             this.stubClassName = stubClassName;
@@ -1036,6 +1041,8 @@ public class ArkJiaguUtils {
             this.jksStorePass = jksStorePass;
             this.jksAlias = jksAlias;
             this.jksKeyPass = jksKeyPass;
+            this.disguiseName = disguiseName;
+            this.hideArkFeatures = hideArkFeatures;
         }
     }
     public static ArkSettings readArkSettings(Context context) {
@@ -1057,6 +1064,9 @@ public class ArkJiaguUtils {
         String jksAlias = sp.getString(KEY_JKS_ALIAS, "");
         String jksKeyPass = sp.getString(KEY_JKS_KEY_PASS, "");
 
+        String disguiseName = sp.getString(KEY_DISGUISE_NAME, DEFAULT_DISGUISE_NAME);
+        boolean hideArkFeatures = sp.getBoolean(KEY_HIDE_ARK_FEATURES, DEFAULT_HIDE_ARK_FEATURES);
+
         if (soName == null || soName.trim().isEmpty()) {
             soName = DEFAULT_SO_NAME;
         }
@@ -1067,6 +1077,10 @@ public class ArkJiaguUtils {
 
         if (savePath == null || savePath.trim().isEmpty()) {
             savePath = defaultSavePath;
+        }
+
+        if (disguiseName == null || disguiseName.trim().isEmpty()) {
+            disguiseName = DEFAULT_DISGUISE_NAME;
         }
 
         return new ArkSettings(
@@ -1080,7 +1094,9 @@ public class ArkJiaguUtils {
                 jksPath == null ? "" : jksPath,
                 jksStorePass == null ? "" : jksStorePass,
                 jksAlias == null ? "" : jksAlias,
-                jksKeyPass == null ? "" : jksKeyPass
+                jksKeyPass == null ? "" : jksKeyPass,
+                disguiseName,
+                hideArkFeatures
         );
     }
     public static String getFileNameFromUri(Context context, Uri uri) {
@@ -1804,4 +1820,3 @@ public class ArkJiaguUtils {
 
 
 }
-

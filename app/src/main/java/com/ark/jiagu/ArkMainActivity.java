@@ -80,8 +80,8 @@ public class ArkMainActivity extends ComponentActivity {
 
     private boolean isPermissionDialogShowing = false;
     private boolean hasInitMain = false;
-    private Button btnSettings;
-    private Button btnAbout;
+    private ImageButton btnSettings;
+    private ImageButton btnAbout;
 
 
     static {
@@ -282,7 +282,9 @@ public class ArkMainActivity extends ComponentActivity {
             String jksPath,
             String jksStorePass,
             String jksAlias,
-            String jksKeyPass
+            String jksKeyPass,
+            String disguiseName,
+            boolean hideArkFeatures
     ) {
         android.content.SharedPreferences sp = getSharedPreferences(SP_SETTINGS, MODE_PRIVATE);
 
@@ -298,6 +300,8 @@ public class ArkMainActivity extends ComponentActivity {
                 .putString(KEY_JKS_STORE_PASS, jksStorePass)
                 .putString(KEY_JKS_ALIAS, jksAlias)
                 .putString(KEY_JKS_KEY_PASS, jksKeyPass)
+                .putString(KEY_DISGUISE_NAME, disguiseName)
+                .putBoolean(KEY_HIDE_ARK_FEATURES, hideArkFeatures)
                 .apply();
     }
 
@@ -358,6 +362,8 @@ public class ArkMainActivity extends ComponentActivity {
         android.widget.EditText etStubClassName = dialogView.findViewById(R.id.etStubClassName);
         android.widget.ImageButton btnClearStubClassName = dialogView.findViewById(R.id.btnClearStubClassName);
         android.widget.ImageButton btnClearSavePath = dialogView.findViewById(R.id.btnClearSavePath);
+        android.widget.EditText etDisguiseName = dialogView.findViewById(R.id.etDisguiseName);
+        android.widget.Switch swHideArkFeatures = dialogView.findViewById(R.id.swHideArkFeatures);
 
 
         ArkSettings settings = readArkSettings(this);
@@ -373,6 +379,9 @@ public class ArkMainActivity extends ComponentActivity {
         etJksStorePass.setText(settings.jksStorePass);
         etJksAlias.setText(settings.jksAlias);
         etJksKeyPass.setText(settings.jksKeyPass);
+
+        etDisguiseName.setText(settings.disguiseName);
+        swHideArkFeatures.setChecked(settings.hideArkFeatures);
 
         llCustomJksForm.setVisibility(settings.useCustomJks ? View.VISIBLE : View.GONE);
 
@@ -416,6 +425,8 @@ public class ArkMainActivity extends ComponentActivity {
             String jksStorePass = etJksStorePass.getText().toString();
             String jksAlias = etJksAlias.getText().toString().trim();
             String jksKeyPass = etJksKeyPass.getText().toString();
+            String disguiseName = etDisguiseName.getText().toString().trim();
+            boolean hideArkFeatures = swHideArkFeatures.isChecked();
 
             if (!isValidSoName(soName)) {
                 Toast.makeText(
@@ -458,7 +469,9 @@ public class ArkMainActivity extends ComponentActivity {
                     jksPath,
                     jksStorePass,
                     jksAlias,
-                    jksKeyPass
+                    jksKeyPass,
+                    disguiseName,
+                    hideArkFeatures
             );
 
             Toast.makeText(this, getString(R.string.settings_saved), Toast.LENGTH_SHORT).show();
@@ -1399,4 +1412,3 @@ public class ArkMainActivity extends ComponentActivity {
     }
 
 }
-

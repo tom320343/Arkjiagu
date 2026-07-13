@@ -1,28 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#FFFFFF">
-
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_log"
+    android:orientation="vertical">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
+        android:layout_weight="1"
+        android:fillViewport="false">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+
+            android:padding="18dp">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Settings1"
+                android:textColor="#1F2937"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/so_name"
+                android:textColor="#374151"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etSoName"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:text="ArkStub"
+                    android:textColor="#1F2937"
+                    android:textSize="14sp" />
+
+                <ImageButton
+                    android:id="@+id/btnSoNamePreset"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_button"
+                    android:contentDescription="@string/SoNamePreset"
+                    android:padding="12dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_settings"
+                    android:tint="#FFFFFF" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/shell_name"
+                android:textColor="#374151"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etStubClassName"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input"
+                    android:hint="例如：com.ark.safe.StubApp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:text="com.ark.safe.StubApp"
+                    android:textColor="#1F2937"
+                    android:textColorHint="#9CA3AF"
+                    android:textSize="14sp" />
+
+                <ImageButton
+                    android:id="@+id/btnClearStubClassName"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_delete_button"
+                    android:contentDescription="@string/ClearStubClassName"
+                    android:padding="12dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_delete"
+                    android:tint="#FFFFFF" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/path"
+                android:textColor="#374151"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etSavePath"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:textColor="#1F2937"
+                    android:textSize="14sp" />
+
+                <ImageButton
+                    android:id="@+id/btnClearSavePath"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_delete_button"
+                    android:contentDescription="@string/ClearSavePath"
+                    android:padding="12dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_delete"
+                    android:tint="#FFFFFF" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/enable_vmp_extract"
+                    android:textColor="#374151"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/swEnableVmpExtract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/debug"
+                    android:textColor="#374151"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/swDebug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/sign"
+                    android:textColor="#374151"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/swAutoSign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="JKS签名配置"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginBottom="12dp" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/jks"
+                    android:textColor="#374151"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/swUseCustomJks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llCustomJksForm"
@@ -31,27 +242,146 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <EditText android:id="@+id/etJksPath" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="JKS文件路径" android:layout_marginBottom="4dp"/>
-                <EditText android:id="@+id/etJksStorePass" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Store密码" android:inputType="textPassword" android:layout_marginBottom="4dp"/>
-                <EditText android:id="@+id/etJksAlias" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="别名" android:layout_marginBottom="4dp"/>
-                <EditText android:id="@+id/etJksKeyPass" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Key密码" android:inputType="textPassword" android:layout_marginBottom="8dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/jks_path"
+                    android:textColor="#374151"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etJksPath"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:textColor="#1F2937"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/cart_pass"
+                    android:textColor="#374151"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etJksStorePass"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:inputType="textPassword"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:textColor="#1F2937"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/alias"
+                    android:textColor="#374151"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etJksAlias"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:textColor="#1F2937"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/alias_pass"
+                    android:textColor="#374151"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etJksKeyPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:inputType="textPassword"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:textColor="#1F2937"
+                    android:textSize="14sp" />
+
             </LinearLayout>
 
-            <Switch android:id="@+id/swUseCustomJks" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="使用自定义签名" android:layout_marginBottom="8dp"/>
-            <Switch android:id="@+id/swAutoSign" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="自动签名" android:layout_marginBottom="8dp"/>
-            <Switch android:id="@+id/swDebug" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="调试模式" android:layout_marginBottom="8dp"/>
-            <Switch android:id="@+id/swEnableVmpExtract" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="VMP代码抽取" android:layout_marginBottom="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/disguise_name"
+                android:textColor="#374151"
+                android:textSize="14sp" />
 
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp">
-                <EditText android:id="@+id/etSavePath" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="保存路径" android:layout_marginBottom="4dp"/>
-                <EditText android:id="@+id/etSoName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="SO文件名称" android:layout_marginBottom="4dp"/>
-                <EditText android:id="@+id/etStubClassName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="壳类名称 (可留空)" android:layout_marginBottom="8dp"/>
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                    <Button android:id="@+id/btnClearSavePath" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="清除保存路径" android:layout_marginEnd="4dp"/>
-                    <Button android:id="@+id/btnClearStubClassName" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="清除壳类名" android:layout_marginStart="4dp"/>
-                </LinearLayout>
-                <Button android:id="@+id/btnSaveSettings" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="保存设置" android:layout_marginTop="8dp"/>
+            <EditText
+                android:id="@+id/etDisguiseName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_input"
+                android:hint="例如：360加固、腾讯乐固"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:text="Ark加固"
+                android:textColor="#1F2937"
+                android:textColorHint="#9CA3AF"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/hide_ark_features"
+                    android:textColor="#374151"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/swHideArkFeatures"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
+    <Button
+        android:id="@+id/btnSaveSettings"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/bg_button"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
 </LinearLayout>

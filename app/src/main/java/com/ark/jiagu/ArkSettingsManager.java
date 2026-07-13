@@ -15,10 +15,13 @@ public class ArkSettingsManager {
     public static final String KEY_JKS_KEY_PASS = "jks_key_pass";
     public static final String KEY_STUB_CLASS_NAME = "stub_class_name";
     public static final String DEFAULT_STUB_CLASS_NAME = "com.ark.safe.StubApp";
+    public static final String KEY_DISGUISE_NAME = "disguise_name";
+    public static final String DEFAULT_DISGUISE_NAME = "Ark加固";
+    public static final String KEY_HIDE_ARK_FEATURES = "hide_ark_features";
+    public static final boolean DEFAULT_HIDE_ARK_FEATURES = false;
     public static final String TEMP_DIR_NAME = "ArkJiagu";//临时工作目录名称，不要乱改，这个目录是会被清空的
     public static final int REQ_STORAGE_PERMISSION = 10086;
     public static final String DEBUG_RAW_DEX_DIR = "Appdex";
     public static final String DEBUG_VMP_DEX_DIR = "VMPdex";
     public static final String ARK_VMP_SECTION_NAME = ".avmp";
 }
-

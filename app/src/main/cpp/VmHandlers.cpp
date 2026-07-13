@@ -294,91 +294,6 @@ static std::vector<std::string> parseParameterTypesFromSignature(const std::stri
     return result;
 }
 
-
-static bool buildJValueArgsFromMethod(
-        VmContext &ctx,
-        const std::vector<std::string> &paramTypes,
-        std::vector<jvalue> &args
-) {
-    args.clear();
-
-    if (ctx.method == nullptr) {
-        LOGE("buildJValueArgsFromMethod method为空");
-        return false;
-    }
-
-    int paramRegisterCount = ctx.method->isStatic ? 0 : 1;
-
-    for (int i = 0; i < static_cast<int>(ctx.method->parameterTypes.size()); i++) {
-        const std::string &type = ctx.method->parameterTypes[i];
-        if (type == "J" || type == "D") {
-            paramRegisterCount += 2;
-        } else {
-            paramRegisterCount += 1;
-        }
-    }
-
-    int paramBase = ctx.method->registerCount - paramRegisterCount;
-    if (paramBase < 0) {
-        LOGE("buildJValueArgsFromMethod 参数寄存器计算错误 registerCount=%d paramRegisterCount=%d",
-             ctx.method->registerCount, paramRegisterCount);
-        return false;
-    }
-
-    int current = paramBase;
-
-    if (!ctx.method->isStatic) {
-        current++;
-    }
-
-    for (int i = 0; i < static_cast<int>(paramTypes.size()); i++) {
-        if (current >= static_cast<int>(ctx.regs.size())) {
-            LOGE("buildJValueArgsFromMethod 寄存器越界 index=%d current=%d", i, current);
-            return false;
-        }
-
-        const std::string &type = paramTypes[i];
-
-        jvalue value;
-        memset(&value, 0, sizeof(jvalue));
-
-        if (type == "Z") {
-            value.z = ctx.regs[current].intValue ? JNI_TRUE : JNI_FALSE;
-            current++;
-        } else if (type == "B") {
-            value.b = static_cast<jbyte>(ctx.regs[current].intValue);
-            current++;
-        } else if (type == "S") {
-            value.s = static_cast<jshort>(ctx.regs[current].intValue);
-            current++;
-        } else if (type == "C") {
-            value.c = static_cast<jchar>(ctx.regs[current].intValue);
-            current++;
-        } else if (type == "I") {
-            value.i = static_cast<jint>(ctx.regs[current].intValue);
-            current++;
-        } else if (type == "J") {
-            value.j = static_cast<jlong>(ctx.regs[current].longValue);
-            current += 2;
-        } else if (type == "F") {
-            jint bits = static_cast<jint>(ctx.regs[current].intValue);
-            memcpy(&value.f, &bits, sizeof(jfloat));
-            current++;
-        } else if (type == "D") {
-            jlong bits = static_cast<jlong>(ctx.regs[current].longValue);
-            memcpy(&value.d, &bits, sizeof(jdouble));
-            current += 2;
-        } else {
-            value.l = ctx.regs[current].objectValue;
-            current++;
-        }
-
-        args.push_back(value);
-    }
-
-    return true;
-}
-
 static bool buildJValueArgs(
         VmContext &ctx,
         const VmpInstruction &insn,
@@ -437,6 +352,90 @@ static bool buildJValueArgs(
 
     return true;
 }
+
+static bool buildJValueArgsFromMethod(
+        VmContext &ctx,
+        const std::vector<std::string> &paramTypes,
+        std::vector<jvalue> &args,
+        bool isNonStaticCall
+) {
+    args.clear();
+
+    if (ctx.method == nullptr) {
+        LOGE("buildJValueArgsFromMethod ctx.method为空");
+        return false;
+    }
+
+    int paramRegisterCount = ctx.method->isStatic ? 0 : 1;
+
+    for (int i = 0; i < static_cast<int>(ctx.method->parameterTypes.size()); i++) {
+        const std::string &type = ctx.method->parameterTypes[i];
+        if (type == "J" || type == "D") {
+            paramRegisterCount += 2;
+        } else {
+            paramRegisterCount += 1;
+        }
+    }
+
+    int paramBase = ctx.method->registerCount - paramRegisterCount;
+    if (paramBase < 0) {
+        LOGE("buildJValueArgsFromMethod paramBase计算出错 registerCount=%d paramRegisterCount=%d",
+             ctx.method->registerCount, paramRegisterCount);
+        return false;
+    }
+
+    int currentReg = paramBase;
+
+    if (!ctx.method->isStatic && isNonStaticCall) {
+        currentReg++;
+    }
+
+    for (int i = 0; i < static_cast<int>(paramTypes.size()); i++) {
+        if (currentReg >= static_cast<int>(ctx.regs.size())) {
+            LOGE("buildJValueArgsFromMethod 寄存器不足 index=%d currentReg=%d regs.size=%zu",
+                 i, currentReg, ctx.regs.size());
+            return false;
+        }
+
+        const std::string &type = paramTypes[i];
+
+        jvalue value;
+        memset(&value, 0, sizeof(jvalue));
+
+        if (type == "Z") {
+            value.z = ctx.regs[currentReg].intValue ? JNI_TRUE : JNI_FALSE;
+        } else if (type == "B") {
+            value.b = static_cast<jbyte>(ctx.regs[currentReg].intValue);
+        } else if (type == "S") {
+            value.s = static_cast<jshort>(ctx.regs[currentReg].intValue);
+        } else if (type == "C") {
+            value.c = static_cast<jchar>(ctx.regs[currentReg].intValue);
+        } else if (type == "I") {
+            value.i = static_cast<jint>(ctx.regs[currentReg].intValue);
+        } else if (type == "J") {
+            value.j = static_cast<jlong>(ctx.regs[currentReg].longValue);
+        } else if (type == "F") {
+            jint bits = static_cast<jint>(ctx.regs[currentReg].intValue);
+            memcpy(&value.f, &bits, sizeof(jfloat));
+        } else if (type == "D") {
+            jlong bits = static_cast<jlong>(ctx.regs[currentReg].longValue);
+            memcpy(&value.d, &bits, sizeof(jdouble));
+        } else {
+            value.l = ctx.regs[currentReg].objectValue;
+        }
+
+        args.push_back(value);
+
+        if (type == "J" || type == "D") {
+            currentReg += 2;
+        } else {
+            currentReg += 1;
+        }
+    }
+
+    return true;
+}
+
 static void logAndClearJavaException(JNIEnv *env, const char *tag) {
     if (env == nullptr || !env->ExceptionCheck()) {
         return;
@@ -5496,8 +5495,22 @@ bool VmHandleInvokeCommon(VmContext &ctx, const VmpInstruction &insn) {
 
     std::vector<std::string> paramTypes = parseParamTypesFromSignature(signature);
     std::vector<jvalue> args;
+    bool argsReady = false;
 
-    if (!buildJValueArgs(ctx, insn, paramTypes, args)) {
+    if (paramTypes.empty()) {
+        argsReady = true;
+    } else {
+        if (buildJValueArgs(ctx, insn, paramTypes, args)) {
+            argsReady = true;
+        } else {
+            LOGE("INVOKE_DIRECT buildJValueArgs失败，尝试buildJValueArgsFromMethod回退 ref=%s", insn.referenceData.c_str());
+            if (buildJValueArgsFromMethod(ctx, paramTypes, args, true)) {
+                argsReady = true;
+            }
+        }
+    }
+
+    if (!argsReady) {
         return false;
     }
 
@@ -5623,8 +5636,22 @@ bool VmHandleInvokeDirect(VmContext &ctx, const VmpInstruction &insn) {
 
     std::vector<std::string> paramTypes = parseParamTypesFromSignature(signature);
     std::vector<jvalue> args;
+    bool argsReady = false;
 
-    if (!buildJValueArgs(ctx, insn, paramTypes, args)) {
+    if (paramTypes.empty()) {
+        argsReady = true;
+    } else {
+        if (buildJValueArgs(ctx, insn, paramTypes, args)) {
+            argsReady = true;
+        } else {
+            LOGE("INVOKE_VIRTUAL buildJValueArgs失败，尝试buildJValueArgsFromMethod回退 ref=%s", insn.referenceData.c_str());
+            if (buildJValueArgsFromMethod(ctx, paramTypes, args, true)) {
+                argsReady = true;
+            }
+        }
+    }
+
+    if (!argsReady) {
         return false;
     }
 
@@ -5754,23 +5781,34 @@ bool VmHandleInvokeSuper(VmContext &ctx, const VmpInstruction &insn) {
         return false;
     }
 
-    std::vector<std::string> paramTypes = parseParamTypesFromSignature(signature);
+    std::vector<std::string> paramTypes = parseParameterTypesFromSignature(signature);
     std::vector<jvalue> args;
+    bool argsReady = false;
 
-    if (!buildJValueArgs(ctx, insn, paramTypes, args)) {
-        LOGE("INVOKE_SUPER buildJValueArgs失败，尝试buildJValueArgsFromMethod");
-        if (!buildJValueArgsFromMethod(ctx, paramTypes, args)) {
-            LOGE("INVOKE_SUPER 构造参数失败：%s", insn.referenceData.c_str());
-            return false;
+    if (paramTypes.empty()) {
+        argsReady = true;
+    } else {
+        if (buildJValueArgs(ctx, insn, paramTypes, args)) {
+            argsReady = true;
+        } else {
+            LOGE("INVOKE_SUPER buildJValueArgs失败，尝试buildJValueArgsFromMethod回退 ref=%s", insn.referenceData.c_str());
+            if (buildJValueArgsFromMethod(ctx, paramTypes, args, true)) {
+                argsReady = true;
+            }
         }
     }
+
+    if (!argsReady) {
+        LOGE("INVOKE_SUPER 构造参数失败：%s", insn.referenceData.c_str());
+        return false;
+    }
+
+    std::string returnType = getReturnTypeFromSignature(signature);
+    jvalue *argPtr = args.empty() ? nullptr : args.data();
 
     ctx.lastResultObject = nullptr;
     ctx.lastResultInt = 0;
     ctx.lastResultLong = 0;
-
-    std::string returnType = getReturnTypeFromSignature(signature);
-    jvalue *argPtr = args.empty() ? nullptr : args.data();
 
     if (returnType == "V") {
         ctx.env->CallNonvirtualVoidMethodA(obj, superCls, mid, argPtr);
@@ -5806,11 +5844,14 @@ bool VmHandleInvokeSuper(VmContext &ctx, const VmpInstruction &insn) {
 
     if (ctx.env->ExceptionCheck()) {
         ctx.currentException = ctx.env->ExceptionOccurred();
-        ctx.env->ExceptionClear();
+
         LOGE("INVOKE_SUPER 调用失败：%s", insn.referenceData.c_str());
+        logAndClearJavaException(ctx.env, "INVOKE_SUPER");
+
         if (VmContext_JumpToExceptionHandler(ctx, insn.codeUnitOffset)) {
             return true;
         }
+
         return false;
     }
 
@@ -6016,8 +6057,22 @@ bool VmHandleInvokeVirtualRange(VmContext &ctx, const VmpInstruction &insn) {
 
     std::vector<std::string> paramTypes = parseParameterTypesFromSignature(signature);
     std::vector<jvalue> args;
+    bool argsReady = false;
 
-    if (!buildJValuesFromRegisters(ctx, paramTypes, insn.registers, 1, args)) {
+    if (paramTypes.empty()) {
+        argsReady = true;
+    } else {
+        if (buildJValuesFromRegisters(ctx, paramTypes, insn.registers, 1, args)) {
+            argsReady = true;
+        } else {
+            LOGE("INVOKE_VIRTUAL_RANGE buildJValuesFromRegisters失败，尝试buildJValueArgsFromMethod回退 ref=%s", insn.referenceData.c_str());
+            if (buildJValueArgsFromMethod(ctx, paramTypes, args, true)) {
+                argsReady = true;
+            }
+        }
+    }
+
+    if (!argsReady) {
         LOGE("INVOKE_VIRTUAL_RANGE 构造参数失败：%s", insn.referenceData.c_str());
         return false;
     }
@@ -6070,7 +6125,6 @@ bool VmHandleInvokeVirtualRange(VmContext &ctx, const VmpInstruction &insn) {
     ctx.pc++;
     return true;
 }
-
 //指令 INVOKE_SUPER_RANGE
 bool VmHandleInvokeSuperRange(VmContext &ctx, const VmpInstruction &insn) {
     std::string classType;
@@ -6123,22 +6177,34 @@ bool VmHandleInvokeSuperRange(VmContext &ctx, const VmpInstruction &insn) {
         return false;
     }
 
-    std::vector<std::string> paramTypes = parseMethodParamTypesFromSignature(signature);
+    std::vector<std::string> paramTypes = parseParameterTypesFromSignature(signature);
     std::vector<jvalue> args;
+    bool argsReady = false;
 
-    if (!buildJValuesFromRegisters(ctx, paramTypes, insn.registers, 1, args)) {
-        LOGE("INVOKE_SUPER_RANGE buildJValuesFromRegisters失败，尝试buildJValueArgsFromMethod");
-        if (!buildJValueArgsFromMethod(ctx, paramTypes, args)) {
-            LOGE("INVOKE_SUPER_RANGE 构造参数失败：%s", insn.referenceData.c_str());
-            return false;
+    if (paramTypes.empty()) {
+        argsReady = true;
+    } else {
+        if (buildJValuesFromRegisters(ctx, paramTypes, insn.registers, 1, args)) {
+            argsReady = true;
+        } else {
+            LOGE("INVOKE_SUPER_RANGE buildJValuesFromRegisters失败，尝试buildJValueArgsFromMethod回退 ref=%s", insn.referenceData.c_str());
+            if (buildJValueArgsFromMethod(ctx, paramTypes, args, true)) {
+                argsReady = true;
+            }
         }
     }
+
+    if (!argsReady) {
+        LOGE("INVOKE_SUPER_RANGE 构造参数失败：%s", insn.referenceData.c_str());
+        return false;
+    }
+
+    std::string returnType = getReturnTypeFromSignature(signature);
 
     ctx.lastResultObject = nullptr;
     ctx.lastResultInt = 0;
     ctx.lastResultLong = 0;
 
-    std::string returnType = getMethodReturnTypeFromSignature(signature);
     jvalue *argPtr = args.empty() ? nullptr : args.data();
 
     if (returnType == "V") {
@@ -6175,11 +6241,14 @@ bool VmHandleInvokeSuperRange(VmContext &ctx, const VmpInstruction &insn) {
 
     if (ctx.env->ExceptionCheck()) {
         ctx.currentException = ctx.env->ExceptionOccurred();
-        ctx.env->ExceptionClear();
+
         LOGE("INVOKE_SUPER_RANGE 调用失败：%s", insn.referenceData.c_str());
+        logAndClearJavaException(ctx.env, "INVOKE_SUPER_RANGE");
+
         if (VmContext_JumpToExceptionHandler(ctx, insn.codeUnitOffset)) {
             return true;
         }
+
         return false;
     }
 
@@ -6226,8 +6295,22 @@ bool VmHandleInvokeStaticRange(VmContext &ctx, const VmpInstruction &insn) {
 
     std::vector<std::string> paramTypes = parseMethodParamTypesFromSignature(signature);
     std::vector<jvalue> args;
+    bool argsReady = false;
 
-    if (!buildJValuesFromRegisters(ctx, paramTypes, insn.registers, 0, args)) {
+    if (paramTypes.empty()) {
+        argsReady = true;
+    } else {
+        if (buildJValuesFromRegisters(ctx, paramTypes, insn.registers, 0, args)) {
+            argsReady = true;
+        } else {
+            LOGE("INVOKE_STATIC_RANGE buildJValuesFromRegisters失败，尝试buildJValueArgsFromMethod回退 ref=%s", insn.referenceData.c_str());
+            if (buildJValueArgsFromMethod(ctx, paramTypes, args, false)) {
+                argsReady = true;
+            }
+        }
+    }
+
+    if (!argsReady) {
         return false;
     }
 
@@ -6327,8 +6410,22 @@ bool VmHandleInvokeInterfaceRange(VmContext &ctx, const VmpInstruction &insn) {
 
     std::vector<std::string> paramTypes = parseMethodParamTypesFromSignature(signature);
     std::vector<jvalue> args;
+    bool argsReady = false;
 
-    if (!buildJValuesFromRegisters(ctx, paramTypes, insn.registers, 1, args)) {
+    if (paramTypes.empty()) {
+        argsReady = true;
+    } else {
+        if (buildJValuesFromRegisters(ctx, paramTypes, insn.registers, 1, args)) {
+            argsReady = true;
+        } else {
+            LOGE("INVOKE_INTERFACE_RANGE buildJValuesFromRegisters失败，尝试buildJValueArgsFromMethod回退 ref=%s", insn.referenceData.c_str());
+            if (buildJValueArgsFromMethod(ctx, paramTypes, args, true)) {
+                argsReady = true;
+            }
+        }
+    }
+
+    if (!argsReady) {
         return false;
     }
 
@@ -9792,4 +9889,3 @@ VmHandler VmHandlers_Get(int vmOpcode) {
 
     return g_handlerTable[vmOpcode];
 }
-
