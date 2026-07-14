@@ -80,8 +80,8 @@ public class GuardMainActivity extends ComponentActivity {
 
     private boolean isPermissionDialogShowing = false;
     private boolean hasInitMain = false;
-    private ImageButton btnSettings;
-    private ImageButton btnAbout;
+    private Button btnSettings;
+    private Button btnAbout;
 
 
     static {
