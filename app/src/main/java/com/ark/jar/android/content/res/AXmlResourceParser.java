@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ark.jar.android.content.res;
+package com.apk.guard.jar.android.content.res;
 
-import com.ark.jar.android.content.res.ChunkUtil;
-import com.ark.jar.android.content.res.IntReader;
-import com.ark.jar.android.content.res.StringBlock;
+import com.apk.guard.jar.android.content.res.ChunkUtil;
+import com.apk.guard.jar.android.content.res.IntReader;
+import com.apk.guard.jar.android.content.res.StringBlock;
 import android.content.res.XmlResourceParser;
 import android.util.TypedValue;
 

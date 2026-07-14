@@ -1,4 +1,4 @@
-package com.ark.jar.android.content.res;
+package com.apk.guard.jar.android.content.res;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

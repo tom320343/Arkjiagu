@@ -20,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Arkjiagu"
+rootProject.name = "ApkGuard"
 include ':app'
 

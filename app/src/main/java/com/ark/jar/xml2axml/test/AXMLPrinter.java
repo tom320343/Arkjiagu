@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ark.jar.xml2axml.test;
+package com.apk.guard.jar.xml2axml.test;
 
-import com.ark.jar.android.content.res.AXmlResourceParser;
+import com.apk.guard.jar.android.content.res.AXmlResourceParser;
 import android.util.TypedValue;
 
 import org.xmlpull.v1.XmlPullParser;

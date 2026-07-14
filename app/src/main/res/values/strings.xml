@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title">Ark APK Protector 2.3 (Beta)</string>
-    <string name="info">By: Cainiao Bage QQ:2380494437\nProvides basic signature verification, LSPosed injection protection, and VMP method virtualization.\nWarning: A protection tool called "YiGu" is known to be a scam. Please stay vigilant.</string>
-    <string name="info2">By: Cainiao Bage QQ:2380494437\nProvides basic signature verification, LSPosed injection protection, and VMP method virtualization.\nWarning: A protection tool called "YiGu" is known to be a scam. Please stay vigilant.</string>
-    <string name="Button1">Select APK</string>
-    <string name="log">Runtime Log</string>
-    <string name="about_title">About</string>
-    <string name="about_info">Author: Cainiao Bage\nQQ: 2380494437\nSource code (v2.1) has been open-sourced on the MT Forum.\nThis software is completely free. Redistribution for profit is prohibited.</string>
-    <string name="about_info2">This software is intended solely for learning Android security, application protection research, and personal legitimate projects. Do not use it for any illegal purpose.</string>
-    <string name="about_info3">Compatibility has not been fully tested. Protection is not guaranteed to work for every application. Android 8.0 or later is recommended.</string>
-    <string name="updata_log">Update Log:\n1. Optimized DEX encryption.\n2. Added AppComponentFactory support.\n3. Improved DEX loading process.\n4. Optimized Application initialization.</string>
+    <string name="title">安卓加固 3.0 (Professional)</string>
+    <string name="info">APK离线加固工具 - 支持DEX加密/VMP虚拟化/签名校验/环境检测\n适用于Android应用安全保护与逆向工程研究</string>
+    <string name="info2">APK离线加固工具 - 支持DEX加密/VMP虚拟化/签名校验/环境检测\n适用于Android应用安全保护与逆向工程研究</string>
+    <string name="about_info">安卓加固 3.0\n一款开源的APK离线保护工具\n支持DEX整体加密、VMP代码抽取、多层签名校验\n适用于Android安全学习与合法应用保护</string>
+    <string name="about_info2">本工具仅供Android安全学习、应用保护研究与个人合法项目使用\n请勿用于任何非法目的</string>
+    <string name="about_info3">兼容性未经全面测试，不保证对所有应用有效\n推荐Android 8.0及以上系统</string>
+    <string name="updata_log">更新日志:\n1. 全新品牌重塑，UI/UX全面优化\n2. VMP多层加密算法升级\n3. 环境检测增强(ROOT/分身/调试器)\n4. 企业加固伪装功能\n5. 性能优化与稳定性提升</string>
     <string name="close">Close</string>
     <string name="Settings">Settings</string>
     <string name="About">About</string>
@@ -43,7 +40,7 @@
     <string name="confirm_clear_save_path">Clear the output directory?</string>
     <string name="invalid_so_name">Invalid SO name. Only letters, numbers, and underscores are allowed. Do not include the "lib" prefix or the ".so" suffix.</string>
     <string name="invalid_stub_class_title">Invalid Class Name</string>
-    <string name="invalid_stub_class_message">The custom stub class name is invalid.\n\nExample:\ncom.ark.safe.StubApp\n\nRules:\n1. Must include both a package name and a class name.\n2. Each segment must not start with a number.\n3. Only letters, numbers, underscores (_), and $ are allowed.\n4. Empty segments are not allowed.</string>
+    <string name="invalid_stub_class_message">The custom stub class name is invalid.\n\nExample:\ncom.apk.guard.safe.StubApp\n\nRules:\n1. Must include both a package name and a class name.\n2. Each segment must not start with a number.\n3. Only letters, numbers, underscores (_), and $ are allowed.\n4. Empty segments are not allowed.</string>
     <string name="invalid_save_path">The output directory is invalid or not writable.</string>
     <string name="cache_save_path_not_allowed">The output directory cannot be located inside the cache directory.</string>
     <string name="settings_saved">Settings saved.</string>
@@ -64,7 +61,7 @@
     <string name="manual_sign_message">The APK has been protected successfully, but it was not signed. Please sign it manually before installing.</string>
     <string name="ok">OK</string>
     <string name="protected_apk_output">Protected APK Output: %1$s</string>
-    <string name="enable_vmp_extract">Enable VMP code extraction\nMay cause the protected app to crash after enabling</string>
-    <string name="disguise_name">Protection Signature Name</string>
-    <string name="hide_ark_features">Force Hide Ark Protection Signatures\nErases all Ark identifiers after building</string>
+    <string name="enable_vmp_extract">启用VMP代码抽取\n可能导致受保护应用闪退</string>
+    <string name="disguise_name">保护签名名称</string>
+    <string name="hide_ark_features">强制隐藏保护特征\n清除构建后所有保护标识信息</string>
 </resources>

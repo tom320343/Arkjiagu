@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ark.jar.android.graphics;
+package com.apk.guard.jar.android.graphics;
 
 import java.util.HashMap;
 import java.util.Locale;

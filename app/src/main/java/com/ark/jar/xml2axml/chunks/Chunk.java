@@ -1,9 +1,9 @@
-package com.ark.jar.xml2axml.chunks;
+package com.apk.guard.jar.xml2axml.chunks;
 
 import android.content.Context;
 
-import com.ark.jar.xml2axml.IntWriter;
-import com.ark.jar.xml2axml.ReferenceResolver;
+import com.apk.guard.jar.xml2axml.IntWriter;
+import com.apk.guard.jar.xml2axml.ReferenceResolver;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;

@@ -1,9 +1,9 @@
-package com.ark.jar.xml2axml.chunks;
+package com.apk.guard.jar.xml2axml.chunks;
 
 import android.text.TextUtils;
 
-import com.ark.jar.xml2axml.Encoder;
-import com.ark.jar.xml2axml.IntWriter;
+import com.apk.guard.jar.xml2axml.Encoder;
+import com.apk.guard.jar.xml2axml.IntWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;

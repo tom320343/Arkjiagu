@@ -1,11 +1,11 @@
-package com.ark.jar.xml2axml;
+package com.apk.guard.jar.xml2axml;
 
 import android.content.Context;
 
-import com.ark.jar.xml2axml.chunks.Chunk;
-import com.ark.jar.xml2axml.chunks.StringPoolChunk;
-import com.ark.jar.xml2axml.chunks.TagChunk;
-import com.ark.jar.xml2axml.chunks.XmlChunk;
+import com.apk.guard.jar.xml2axml.chunks.Chunk;
+import com.apk.guard.jar.xml2axml.chunks.StringPoolChunk;
+import com.apk.guard.jar.xml2axml.chunks.TagChunk;
+import com.apk.guard.jar.xml2axml.chunks.XmlChunk;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

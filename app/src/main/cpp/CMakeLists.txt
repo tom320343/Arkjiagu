@@ -1,30 +1,28 @@
 cmake_minimum_required(VERSION 3.22.1)
 
-project("ArkStub")
+project("ApkGuard")
 
 add_library(
-        ArkStub
+        ApkGuard
         SHARED
-        ArkStub.cpp
+        GuardVMP.cpp
         sha256.cpp
-        ArkDexLoader.cpp
-        ArkEnvGuard.cpp
-        ArkSelfHash.cpp
-        ArkVMP.cpp
+        GuardDexLoader.cpp
+        GuardEnvGuard.cpp
+        GuardSelfHash.cpp
         VmpRuntime.cpp
         VmpParser.cpp
         VmpInterpreter.cpp
         VmContext.cpp
         VmHandlers.cpp
         VmOpcodeHandler.cpp
-
 )
 
-
 target_compile_options(
-        ArkStub
+        ApkGuard
         PRIVATE
-        -Os
+        -O2
+        -DNDEBUG
         -fvisibility=hidden
         -fvisibility-inlines-hidden
         -ffunction-sections
@@ -34,7 +32,7 @@ target_compile_options(
 )
 
 target_link_options(
-        ArkStub
+        ApkGuard
         PRIVATE
         "-Wl,--gc-sections"
         "-Wl,--strip-all"
@@ -48,22 +46,22 @@ find_library(log-lib log)
 find_library(android-lib android)
 
 target_link_libraries(
-        ArkStub
+        ApkGuard
         ${log-lib}
         ${android-lib}
 )
 
-# 加固器工具 so：libArkTool.so
 add_library(
-        ArkTool
+        GuardTool
         SHARED
-        ArkTool.cpp
+        GuardTool.cpp
 )
 
 target_compile_options(
-        ArkTool
+        GuardTool
         PRIVATE
-        -Os
+        -O2
+        -DNDEBUG
         -fvisibility=hidden
         -fvisibility-inlines-hidden
         -ffunction-sections
@@ -73,7 +71,7 @@ target_compile_options(
 )
 
 target_link_options(
-        ArkTool
+        GuardTool
         PRIVATE
         "-Wl,--gc-sections"
         "-Wl,--strip-all"
@@ -84,14 +82,7 @@ target_link_options(
 )
 
 target_link_libraries(
-        ArkTool
+        GuardTool
         ${log-lib}
         ${android-lib}
 )
-
-target_link_libraries(
-        ArkTool
-        ${log-lib}
-        ${android-lib}
-)
-

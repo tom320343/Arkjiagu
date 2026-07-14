@@ -20,12 +20,12 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.ark.jiagu.ArkMainActivity {
+-keep class com.apk.guard.GuardMainActivity {
     native <methods>;
 }
--keepclasseswithmembernames class com.ark.jiagu.vm.VmpUtils {
+-keepclasseswithmembernames class com.apk.guard.vm.VmpUtils {
     native <methods>;
 }
--keep class com.ark.** { *; }
--keepnames class com.ark.**
+-keep class com.apk.guard.** { *; }
+-keepnames class com.apk.guard.**
 

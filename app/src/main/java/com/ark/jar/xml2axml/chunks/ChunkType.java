@@ -1,4 +1,4 @@
-package com.ark.jar.xml2axml.chunks;
+package com.apk.guard.jar.xml2axml.chunks;
 
 enum ChunkType {
     Null(0x0000, -1),

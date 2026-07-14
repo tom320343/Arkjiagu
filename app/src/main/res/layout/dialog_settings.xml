@@ -47,7 +47,7 @@
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:singleLine="true"
-                    android:text="ArkStub"
+                    android:text="ApkGuard"
                     android:textColor="#1F2937"
                     android:textSize="14sp" />
 
@@ -85,11 +85,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/bg_input"
-                    android:hint="例如：com.ark.safe.StubApp"
+                    android:hint="例如：com.apk.guard.safe.StubApp"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:singleLine="true"
-                    android:text="com.ark.safe.StubApp"
+                    android:text="com.apk.guard.safe.StubApp"
                     android:textColor="#1F2937"
                     android:textColorHint="#9CA3AF"
                     android:textSize="14sp" />
@@ -344,7 +344,7 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:singleLine="true"
-                android:text="Ark加固"
+                android:text="安卓加固"
                 android:textColor="#1F2937"
                 android:textColorHint="#9CA3AF"
                 android:textSize="14sp" />
@@ -364,7 +364,7 @@
                     android:textSize="12sp" />
 
                 <Switch
-                    android:id="@+id/swHideArkFeatures"
+                    android:id="@+id/swHideGuardFeatures"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

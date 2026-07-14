@@ -1,6 +1,6 @@
-package com.ark.jar.xml2axml;
+package com.apk.guard.jar.xml2axml;
 
-import com.ark.jar.xml2axml.chunks.ValueChunk;
+import com.apk.guard.jar.xml2axml.chunks.ValueChunk;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

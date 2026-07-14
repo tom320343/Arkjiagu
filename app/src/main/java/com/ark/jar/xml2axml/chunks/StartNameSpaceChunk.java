@@ -1,6 +1,6 @@
-package com.ark.jar.xml2axml.chunks;
+package com.apk.guard.jar.xml2axml.chunks;
 
-import com.ark.jar.xml2axml.IntWriter;
+import com.apk.guard.jar.xml2axml.IntWriter;
 
 import java.io.IOException;
 

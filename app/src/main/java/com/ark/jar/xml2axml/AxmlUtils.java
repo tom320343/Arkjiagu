@@ -1,6 +1,6 @@
-package com.ark.jar.xml2axml;
+package com.apk.guard.jar.xml2axml;
 
-import com.ark.jar.xml2axml.test.AXMLPrinter;
+import com.apk.guard.jar.xml2axml.test.AXMLPrinter;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

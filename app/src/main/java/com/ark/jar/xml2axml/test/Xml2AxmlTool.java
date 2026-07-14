@@ -1,8 +1,8 @@
-package com.ark.jar.xml2axml.test;
+package com.apk.guard.jar.xml2axml.test;
 
 import android.content.Context;
 
-import com.ark.jar.xml2axml.Encoder;
+import com.apk.guard.jar.xml2axml.Encoder;
 
 import org.xmlpull.v1.XmlPullParserException;
 

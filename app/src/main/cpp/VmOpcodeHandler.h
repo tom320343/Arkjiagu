@@ -1,5 +1,5 @@
-#ifndef ARK_VMP_OPCODE_HANDLER_H
-#define ARK_VMP_OPCODE_HANDLER_H
+#ifndef GUARD_VMP_OPCODE_HANDLER_H
+#define GUARD_VMP_OPCODE_HANDLER_H
 
 #include "VmHandlers.h"
 

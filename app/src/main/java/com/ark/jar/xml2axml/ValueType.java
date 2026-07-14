@@ -1,4 +1,4 @@
-package com.ark.jar.xml2axml;
+package com.apk.guard.jar.xml2axml;
 
 /**
  * Created by Roy on 15-10-5.

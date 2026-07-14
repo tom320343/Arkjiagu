@@ -1,4 +1,4 @@
-package com.ark.jar.android.text;
+package com.apk.guard.jar.android.text;
 
 /**
  * Android 兼容版 TextUtils

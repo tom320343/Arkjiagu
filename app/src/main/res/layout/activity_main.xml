@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:fontFamily="monospace"
-            android:text="Ark加固器 v2.4\n等待选择APK..." />
+            android:text="安卓加固 v2.4\n等待选择APK..." />
     </ScrollView>
 
     <LinearLayout

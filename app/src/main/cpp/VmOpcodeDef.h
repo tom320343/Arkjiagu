@@ -1,5 +1,5 @@
-#ifndef ARK_VMP_OPCODE_DEF_H
-#define ARK_VMP_OPCODE_DEF_H
+#ifndef GUARD_VMP_OPCODE_DEF_H
+#define GUARD_VMP_OPCODE_DEF_H
 
 // =====================================================
 // Dalvik / Dex Opcode 定义

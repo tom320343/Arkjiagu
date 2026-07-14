@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <vector>
 #include "VmpRuntime.h"
-#define LOG_TAG "ArkVMP_Handlers"
+#define LOG_TAG "GuardVMP_Handlers"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
@@ -9502,7 +9502,7 @@ bool VmHandleInvokeCustom(VmContext &ctx, const VmpInstruction &insn) {
         }
     }
 
-    jclass helperClass = ctx.env->FindClass("com/ark/jiagu/vm/VmpInvokeCustomHelper");
+    jclass helperClass = ctx.env->FindClass("com/apk/guard/vm/VmpInvokeCustomHelper");
     if (ctx.env->ExceptionCheck() || helperClass == nullptr) {
         ctx.env->ExceptionClear();
         LOGE("INVOKE_CUSTOM 找不到辅助类 VmpInvokeCustomHelper");

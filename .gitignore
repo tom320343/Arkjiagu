@@ -14,3 +14,14 @@
 .cxx
 local.properties
 
+
+# Local
+local.properties
+*.iml
+.idea/
+.gradle/
+build/
+*.apk
+!ApkGuard_v3.0.apk
+app/build/
+app/build/

@@ -1,4 +1,4 @@
-package com.ark.jar.android;
+package com.apk.guard.jar.android;
 
 /**
  * Taken from Android 31 platform R.class.

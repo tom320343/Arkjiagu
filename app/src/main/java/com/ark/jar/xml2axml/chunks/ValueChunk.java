@@ -1,11 +1,11 @@
-package com.ark.jar.xml2axml.chunks;
+package com.apk.guard.jar.xml2axml.chunks;
 
 import android.graphics.Color;
 
-import com.ark.jar.xml2axml.ComplexConsts;
-import com.ark.jar.xml2axml.IntWriter;
-import com.ark.jar.xml2axml.NotImplementedException;
-import com.ark.jar.xml2axml.ValueType;
+import com.apk.guard.jar.xml2axml.ComplexConsts;
+import com.apk.guard.jar.xml2axml.IntWriter;
+import com.apk.guard.jar.xml2axml.NotImplementedException;
+import com.apk.guard.jar.xml2axml.ValueType;
 
 import java.io.IOException;
 import java.util.regex.Matcher;

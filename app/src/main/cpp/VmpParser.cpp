@@ -8,10 +8,10 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
-#define LOG_TAG "ArkVMP_VmpParser"
+#define LOG_TAG "GuardVMP_VmpParser"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
-#define ARK_VMP_SECTION_NAME ".avmp"
+#define GUARD_VMP_SECTION_NAME ".gvmp"
 static VmpBinContext g_bin;
 static bool loadVmpBinFromSelfSoSection(std::vector<unsigned char> &out) {
     out.clear();
@@ -84,7 +84,7 @@ static bool loadVmpBinFromSelfSoSection(std::vector<unsigned char> &out) {
                 }
 
                 const char *name = strtab + sh.sh_name;
-                if (strcmp(name, ARK_VMP_SECTION_NAME) != 0) {
+                if (strcmp(name, GUARD_VMP_SECTION_NAME) != 0) {
                     continue;
                 }
 
@@ -130,7 +130,7 @@ static bool loadVmpBinFromSelfSoSection(std::vector<unsigned char> &out) {
                 }
 
                 const char *name = strtab + sh.sh_name;
-                if (strcmp(name, ARK_VMP_SECTION_NAME) != 0) {
+                if (strcmp(name, GUARD_VMP_SECTION_NAME) != 0) {
                     continue;
                 }
 

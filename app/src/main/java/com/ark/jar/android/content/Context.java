@@ -1,6 +1,6 @@
-package com.ark.jar.android.content;
+package com.apk.guard.jar.android.content;
 
-import com.ark.jar.android.content.res.Resources;
+import com.apk.guard.jar.android.content.res.Resources;
 
 /**
  * Created by Roy on 15-10-6.
